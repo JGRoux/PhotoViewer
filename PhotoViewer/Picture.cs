@@ -8,5 +8,13 @@ namespace PhotoViewer
 {
     class Picture
     {
+        private String Category { get; set; }
+        private int Rating { get; set; }
+        private String[] Keywords { get; set; }
+
+        public Picture()
+        {
+            this.Keywords = new String[5];
+        }
     }
 }
