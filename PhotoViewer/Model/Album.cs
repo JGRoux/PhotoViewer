@@ -6,7 +6,8 @@ using System.Threading.Tasks;
 
 namespace PhotoViewer
 {
-    class Album
+    [Serializable()]
+    public class Album
     {
         private String Title { get; set; }
         private String Subtitle { get; set; }
