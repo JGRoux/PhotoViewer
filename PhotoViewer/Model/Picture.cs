@@ -6,7 +6,8 @@ using System.Threading.Tasks;
 
 namespace PhotoViewer
 {
-    class Picture
+    [Serializable()]
+    public class Picture
     {
         private String Category { get; set; }
         private int Rating { get; set; }
