@@ -19,32 +19,5 @@ namespace PhotoViewer
             this.Keywords = new String[5];
             PicturesList = new List<Picture>();
         }
-
-        public static void WriteXml(List<Album> albums, String file)
-        {
-            XmlSerializer xs = new XmlSerializer(typeof(List<Album>));
-            using (StreamWriter sw = new StreamWriter(file))
-            {
-                xs.Serialize(sw, albums);
-            }
-        }
-
-        public static List<Album> ReadXml(String file)
-        {
-            List<Album> albums = null;
-            XmlSerializer xs = new XmlSerializer(typeof(List<Albums>));
-            try
-            {
-                using (StreamReader sr = new StreamReader(file))
-                {
-                    albums = xs.Deserialize(sr) as List<Album>;
-                }
-            }
-            catch
-            {
-                albums = new List<Album>();
-            }
-            return albums;
-        }
     }
 }
