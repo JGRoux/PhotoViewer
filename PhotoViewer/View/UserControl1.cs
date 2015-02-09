@@ -15,6 +15,7 @@ namespace PhotoViewer.View
         public UserControl1()
         {
             InitializeComponent();
+
         }
 
         private void UserControl1_Load(object sender, EventArgs e)
@@ -28,6 +29,11 @@ namespace PhotoViewer.View
         }
 
         private void button2_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void panel1_Paint(object sender, PaintEventArgs e)
         {
 
         }
