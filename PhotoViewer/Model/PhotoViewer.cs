@@ -8,8 +8,6 @@ namespace PhotoViewer.Model
 {
     class PhotoViewer
     {
-        int coucou2; 
-
         private List<Album> AlbumsList;
 
         public PhotoViewer()
