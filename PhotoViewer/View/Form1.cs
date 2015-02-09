@@ -1,4 +1,5 @@
-﻿using System;
+﻿using PhotoViewer.View;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -40,6 +41,19 @@ namespace PhotoViewer
         private void label1_Click(object sender, EventArgs e)
         {
 
+        }
+
+        private void buttonAddAlbum_Click(object sender, EventArgs e)
+        {
+            DialogAlbumName dialog = new DialogAlbumName();
+
+            // Show testDialog as a modal dialog and determine if DialogResult = OK. 
+            if (dialog.ShowDialog(this) == DialogResult.OK)
+            {
+                // Read the contents of testDialog's TextBox. 
+                this.listBox1.Items.Add(dialog.getTextBox().Text);
+            }
+            dialog.Dispose();
         }
     }
 }
