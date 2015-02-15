@@ -20,9 +20,14 @@ namespace MyPhotoViewer.Model
             this.AlbumsList.Add(new Album(name,subtitle,date)); 
         }
 
-        public Album getAlbum(int nb)
+        public Album getAlbum(String title)
         {
-            return this.AlbumsList.ElementAt(nb);
+            foreach (Album album in this.AlbumsList)
+            {
+                if (album.Title.Equals(title))
+                    return album;
+            }
+            return null;
         }
 
         public void save()

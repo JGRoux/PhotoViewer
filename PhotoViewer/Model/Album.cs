@@ -32,9 +32,14 @@ namespace MyPhotoViewer
             this.PicturesList.Add(new Picture(name));
         }
 
-        public Picture getPicture(int nb)
+        public Picture getPicture(String name)
         {
-            return this.PicturesList.ElementAt(nb);
+            foreach (Picture picture in this.PicturesList)
+            {
+                if (picture.Name.Equals(name))
+                    return picture;
+            }
+            return null;
         }
     }
 }
