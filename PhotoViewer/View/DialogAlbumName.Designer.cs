@@ -1,4 +1,4 @@
-﻿namespace PhotoViewer.View
+﻿namespace MyPhotoViewer.View
 {
     partial class DialogAlbumName
     {

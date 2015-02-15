@@ -1,4 +1,5 @@
-﻿using PhotoViewer.View;
+﻿using MyPhotoViewer.Model;
+using MyPhotoViewer.View;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -9,13 +10,20 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace PhotoViewer
+namespace MyPhotoViewer
 {
     public partial class MainWindow : Form
     {
+        private PhotoViewer photoViewer;
+
         public MainWindow()
         {
             InitializeComponent();
+            this.photoViewer = new PhotoViewer();
+            foreach (Album album in this.photoViewer.AlbumsList)
+            {
+                this.listBox1.Items.Add(album.Title);
+            }
         }
 
         private void Form1_Load(object sender, EventArgs e)
@@ -52,8 +60,15 @@ namespace PhotoViewer
             {
                 // Read the contents of testDialog's TextBox. 
                 this.listBox1.Items.Add(dialog.getTextBox().Text);
+                this.photoViewer.addAlbum(dialog.getTextBox().Text, dialog.getTextBox().Text,DateTime.Now);
+                this.photoViewer.save();
             }
             dialog.Dispose();
+        }
+
+        private void splitContainer1_Panel2_Paint(object sender, PaintEventArgs e)
+        {
+
         }
     }
 }

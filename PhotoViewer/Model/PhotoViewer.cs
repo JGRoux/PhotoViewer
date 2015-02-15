@@ -1,18 +1,33 @@
-﻿using System;
+﻿using MyPhotoViewer.Controller;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace PhotoViewer.Model
+namespace MyPhotoViewer.Model
 {
-    class PhotoViewer
+    public class PhotoViewer
     {
-        private List<Album> AlbumsList;
+        public List<Album> AlbumsList;
 
         public PhotoViewer()
         {
-            AlbumsList = new List<Album>();
+            this.AlbumsList = XMLSaver.ReadXml();
+        }
+
+        public void addAlbum(String name, String subtitle, DateTime date){
+            this.AlbumsList.Add(new Album(name,subtitle,date)); 
+        }
+
+        public Album getAlbum(int nb)
+        {
+            return this.AlbumsList.ElementAt(nb);
+        }
+
+        public void save()
+        {
+            XMLSaver.WriteXml(this.AlbumsList);
         }
     }
 }

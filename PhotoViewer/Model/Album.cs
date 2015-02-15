@@ -4,21 +4,37 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace PhotoViewer
+namespace MyPhotoViewer
 {
     [Serializable()]
     public class Album
     {
-        private String Title { get; set; }
-        private String Subtitle { get; set; }
-        private DateTime Date { get; set; }
-        private String[] Keywords { get; set; }
-        private List<Picture> PicturesList;
+        public String Title { get; set; }
+        public String Subtitle { get; set; }
+        public DateTime Date { get; set; }
+        public String[] Keywords { get; set; }
+        public List<Picture> PicturesList;
 
         public Album()
         {
+            this.PicturesList = new List<Picture>();
             this.Keywords = new String[5];
-            PicturesList = new List<Picture>();
+        }
+
+        public Album(String Title, String Subtitle, DateTime Date):this()
+        {
+            this.Title=Title;
+            this.Subtitle=Subtitle;
+            this.Date=Date;
+        }
+
+        public void addPicture(String name){
+            this.PicturesList.Add(new Picture(name));
+        }
+
+        public Picture getPicture(int nb)
+        {
+            return this.PicturesList.ElementAt(nb);
         }
     }
 }
