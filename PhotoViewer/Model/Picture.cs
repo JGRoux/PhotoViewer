@@ -13,6 +13,7 @@ namespace MyPhotoViewer
         public String Category { get; set; }
         public int Rating { get; set; }
         public String[] Keywords { get; set; }
+        public String Path { get; set; }
 
         public Picture()
         {

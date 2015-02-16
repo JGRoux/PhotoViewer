@@ -10,17 +10,13 @@ using System.Windows.Forms;
 
 namespace MyPhotoViewer.View
 {
-    public partial class UserControl1 : UserControl
+    public partial class UserControlPhoto : UserControl
     {
-        public UserControl1()
+
+        public UserControlPhoto(Picture photo)
         {
             InitializeComponent();
-
-        }
-
-        private void UserControl1_Load(object sender, EventArgs e)
-        {
-
+            pictureBox1.Image = new Bitmap(photo.Path, true);
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -28,12 +24,7 @@ namespace MyPhotoViewer.View
 
         }
 
-        private void button2_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void panel1_Paint(object sender, PaintEventArgs e)
+        private void pictureBox1_Click(object sender, EventArgs e)
         {
 
         }

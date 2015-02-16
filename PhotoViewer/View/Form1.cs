@@ -107,6 +107,11 @@ namespace MyPhotoViewer
                     listboxContextMenu.Show();
                 }
             }
+
+            if (e.Button == MouseButtons.Left)
+            {
+                this.splitContainer1.Panel2.Controls.Add(new UserControlMiniatures(this.photoViewer.getAlbum(listBox1.SelectedItem.ToString())));
+            }
         }
     }
 }
