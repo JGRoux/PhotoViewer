@@ -12,11 +12,13 @@ namespace MyPhotoViewer.View
 {
     public partial class UserControlPhoto : UserControl
     {
-
+        PictureBox pictureBox1 = new PictureBox();
         public UserControlPhoto(Picture photo)
         {
             InitializeComponent();
             pictureBox1.Image = new Bitmap(photo.Path, true);
+            pictureBox1.SizeMode = Zoom;
+            this.panel2.Controls.Add(pictureBox1);
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -28,5 +30,7 @@ namespace MyPhotoViewer.View
         {
 
         }
+
+        public PictureBoxSizeMode Zoom { get; set; }
     }
 }
