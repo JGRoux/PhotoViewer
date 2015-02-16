@@ -31,7 +31,7 @@ namespace MyPhotoViewer
             this.photoViewer = new PhotoViewer();
             foreach (Album album in this.photoViewer.AlbumsList)
             {
-                this.listBox1.Items.Add(album.Title);
+                this.listBox1.Items.Add(album.Name);
             }
         }
 
@@ -78,6 +78,7 @@ namespace MyPhotoViewer
                     else if( this.photoViewer.getAlbum(dialog.getTextBox().Text) == null)
                     {
                         this.listBox1.Items.Add(dialog.getTextBox().Text);
+                        System.IO.Directory.CreateDirectory("albums\\"+dialog.getTextBox().Text);
                         this.photoViewer.addAlbum(dialog.getTextBox().Text, dialog.getTextBox().Text, DateTime.Now);
                         this.photoViewer.save();
                         break;
@@ -110,7 +111,7 @@ namespace MyPhotoViewer
 
             if (e.Button == MouseButtons.Left)
             {
-                this.splitContainer1.Panel2.Controls.Add(new UserControlMiniatures(this.photoViewer.getAlbum(listBox1.SelectedItem.ToString())));
+                this.splitContainer1.Panel2.Controls.Add(new UserControlMiniatures(this.photoViewer, this.photoViewer.getAlbum(listBox1.SelectedItem.ToString())));
             }
         }
     }

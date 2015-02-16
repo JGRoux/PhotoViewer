@@ -9,7 +9,7 @@ namespace MyPhotoViewer
     [Serializable()]
     public class Album
     {
-        public String Title { get; set; }
+        public String Name { get; set; }
         public String Subtitle { get; set; }
         public DateTime Date { get; set; }
         public String[] Keywords { get; set; }
@@ -23,7 +23,7 @@ namespace MyPhotoViewer
 
         public Album(String Title, String Subtitle, DateTime Date):this()
         {
-            this.Title=Title;
+            this.Name=Title;
             this.Subtitle=Subtitle;
             this.Date=Date;
         }

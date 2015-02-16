@@ -24,7 +24,7 @@ namespace MyPhotoViewer.Model
         {
             foreach (Album album in this.AlbumsList)
             {
-                if (album.Title.Equals(title))
+                if (album.Name.Equals(title))
                     return album;
             }
             return null;
