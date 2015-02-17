@@ -16,8 +16,14 @@ namespace MyPhotoViewer.Model
             this.AlbumsList = XMLSaver.ReadXml();
         }
 
-        public void addAlbum(String name, String subtitle, DateTime date){
-            this.AlbumsList.Add(new Album(name,subtitle,date)); 
+        public void addAlbum(String name, String subtitle, DateTime date)
+        {
+            this.AlbumsList.Add(new Album(name, subtitle, date));
+        }
+
+        public void delAlbum(String name)
+        {
+            this.AlbumsList.Remove(this.getAlbum(name));
         }
 
         public Album getAlbum(String title)

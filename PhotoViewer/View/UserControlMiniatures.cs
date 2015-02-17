@@ -27,7 +27,7 @@ namespace MyPhotoViewer.View
 
             foreach (Picture picture in album.PicturesList)
             {
-                this.imageList1.Images.Add(new Bitmap("albums\\"+this.album.Name+"\\"+picture.Name, true));
+                this.imageList1.Images.Add(new Bitmap("albums\\" + this.album.Name + "\\" + picture.Name, true));
                 this.listView1.Items.Add(new ListViewItem());
             }
             // Add event handlers for the drag & drop functionality
@@ -49,25 +49,26 @@ namespace MyPhotoViewer.View
 
         }
 
-        private void getFiles(string[] files){
-        // Read the files
-                foreach (String file in files)
+        private void getFiles(string[] files)
+        {
+            // Read the files
+            foreach (String file in files)
+            {
+                // New picture
+                try
                 {
-                    // New picture
-                    try
-                    {
-                        System.IO.File.Copy(file, "albums\\"+this.album.Name+file.Substring(file.LastIndexOf('\\')), true);
-                        this.album.addPicture(file.Substring(file.LastIndexOf('\\')+1));
-                    }
-                    catch (Exception ex)
-                    {
-                        // Could not load the image - probably related to Windows file system permissions.
-                        MessageBox.Show("Cannot display the image: " + file.Substring(file.LastIndexOf('\\')+1)
-                            + ". You may not have permission to read the file, or " +
-                            "it may be corrupt.\n\nReported error: " + ex.Message);
-                    }
+                    System.IO.File.Copy(file, "albums\\" + this.album.Name + file.Substring(file.LastIndexOf('\\')), true);
+                    this.album.addPicture(file.Substring(file.LastIndexOf('\\') + 1));
                 }
-                this.photoViewer.save();
+                catch (Exception ex)
+                {
+                    // Could not load the image - probably related to Windows file system permissions.
+                    MessageBox.Show("Cannot display the image: " + file.Substring(file.LastIndexOf('\\') + 1)
+                        + ". You may not have permission to read the file, or " +
+                        "it may be corrupt.\n\nReported error: " + ex.Message);
+                }
+            }
+            this.photoViewer.save();
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -95,7 +96,7 @@ namespace MyPhotoViewer.View
 
         private void listview1_DragDrop(object sender, DragEventArgs e)
         {
-           this.getFiles((string[])e.Data.GetData(DataFormats.FileDrop));
+            this.getFiles((string[])e.Data.GetData(DataFormats.FileDrop));
         }
     }
 }
