@@ -68,11 +68,14 @@ namespace MyPhotoViewer
             }
             else if (e.ClickedItem.ToString().Equals("Delete"))
             {
-                System.IO.Directory.Delete("albums\\" + this.listBox1.SelectedItem.ToString(), true);
-                this.photoViewer.delAlbum(this.listBox1.SelectedItem.ToString());
-                this.photoViewer.save();
-                this.listBox1.Items.Remove(this.listBox1.SelectedItem);
-                this.splitContainer1.Panel2.Controls.Clear();
+                if (MessageBox.Show("Every pictures will be deleted on the hard drive.", "Delete", MessageBoxButtons.OKCancel) == DialogResult.OK)
+                {
+                    System.IO.Directory.Delete("albums\\" + this.listBox1.SelectedItem.ToString(), true);
+                    this.photoViewer.delAlbum(this.listBox1.SelectedItem.ToString());
+                    this.photoViewer.save();
+                    this.listBox1.Items.Remove(this.listBox1.SelectedItem);
+                    this.splitContainer1.Panel2.Controls.Clear();
+                }
             }
         }
 
