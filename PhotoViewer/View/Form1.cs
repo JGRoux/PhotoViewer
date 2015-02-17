@@ -29,10 +29,13 @@ namespace MyPhotoViewer
             listboxContextMenu.Opening += new CancelEventHandler(listboxContextMenu_Opening);
             listBox1.ContextMenuStrip = listboxContextMenu;
             this.photoViewer = new PhotoViewer();
-            foreach (Album album in this.photoViewer.AlbumsList)
-            {
-                this.listBox1.Items.Add(album.Name);
-            }
+            //if (this.photoViewer.AlbumsList.ElementAt(0).Name != null)
+            //{
+                foreach (Album album in this.photoViewer.AlbumsList)
+                {
+                    this.listBox1.Items.Add(album.Name);
+                }
+            //}
         }
 
         private void listboxContextMenu_Opening(object sender, CancelEventArgs e)
@@ -111,6 +114,7 @@ namespace MyPhotoViewer
 
             if (e.Button == MouseButtons.Left)
             {
+                this.splitContainer1.Panel2.Controls.Clear();
                 this.splitContainer1.Panel2.Controls.Add(new UserControlMiniatures(this.photoViewer, this.photoViewer.getAlbum(listBox1.SelectedItem.ToString())));
             }
         }

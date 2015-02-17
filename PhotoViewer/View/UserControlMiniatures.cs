@@ -24,12 +24,17 @@ namespace MyPhotoViewer.View
 
             this.photoViewer = photoViewer;
             this.album = album;
-
-            foreach (Picture picture in album.PicturesList)
+            int i = 0;
+            if(this.album.PicturesList != null)
             {
-                this.imageList1.Images.Add(new Bitmap("albums\\"+this.album.Name+"\\"+picture.Name, true));
-                this.listView1.Items.Add(new ListViewItem());
+                foreach (Picture picture in album.PicturesList)
+                {
+                    this.imageList1.Images.Add(new Bitmap("albums\\" + this.album.Name + "\\" + picture.Name, true));
+                    this.listView1.Items.Add(new ListViewItem()).ImageIndex = i;
+                    i++;
+                }
             }
+            
             // Add event handlers for the drag & drop functionality
             this.listView1.AllowDrop = true;
             this.listView1.DragDrop += new DragEventHandler(this.listview1_DragDrop);
