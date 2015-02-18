@@ -38,10 +38,9 @@ namespace MyPhotoViewer
         private void listboxContextMenu_Opening(object sender, CancelEventArgs e)
         {
             //clear the menu and add custom items
-            // listBox1.SelectedItem.ToString()
+            this.listboxContextMenu.Items.Clear();
             if (this.listBox1.SelectedIndex != -1)
             {
-                this.listboxContextMenu.Items.Clear();
                 this.listboxContextMenu.Items.Add("Rename");
                 this.listboxContextMenu.Items.Add("Delete");
             }
@@ -49,10 +48,9 @@ namespace MyPhotoViewer
 
         private void listboxContextMenu_ItemClicked(object sender, ToolStripItemClickedEventArgs e)
         {
-
+            this.listboxContextMenu.Hide();
             if (e.ClickedItem.ToString().Equals("Rename"))
             {
-                System.Console.WriteLine(e.ClickedItem);
                 DialogAlbumName dialog = new DialogAlbumName();
                 dialog.getTextBox().Text = this.listBox1.SelectedItem.ToString();
                 if (dialogCompute(dialog))
@@ -63,12 +61,20 @@ namespace MyPhotoViewer
                     int index = this.listBox1.SelectedIndex;
                     listBox1.Items.RemoveAt(index);
                     listBox1.Items.Insert(index, dialog.getTextBox().Text);
+                    this.listBox1.SelectedIndex = index;
                 }
                 dialog.Dispose();
             }
             else if (e.ClickedItem.ToString().Equals("Delete"))
             {
-                if (MessageBox.Show("Every pictures will be deleted on the hard drive.", "Delete", MessageBoxButtons.OKCancel) == DialogResult.OK)
+                this.rmAlbum();
+            }
+        }
+
+        private void rmAlbum()
+        {
+            if (this.listBox1.SelectedIndex != -1)
+                if (MessageBox.Show("Every pictures of the album " + this.listBox1.SelectedItem.ToString() + " will be deleted on the hard drive.", "Delete", MessageBoxButtons.OKCancel) == DialogResult.OK)
                 {
                     System.IO.Directory.Delete("albums\\" + this.listBox1.SelectedItem.ToString(), true);
                     this.photoViewer.delAlbum(this.listBox1.SelectedItem.ToString());
@@ -76,7 +82,6 @@ namespace MyPhotoViewer
                     this.listBox1.Items.Remove(this.listBox1.SelectedItem);
                     this.splitContainer1.Panel2.Controls.Clear();
                 }
-            }
         }
 
         private void buttonAddAlbum_Click(object sender, EventArgs e)
@@ -121,17 +126,26 @@ namespace MyPhotoViewer
             if (e.Button == MouseButtons.Right)
             {
                 //select the item under the mouse pointer
-                listBox1.SelectedIndex = listBox1.IndexFromPoint(e.Location);
-                if (listBox1.SelectedIndex != -1)
+                this.listBox1.SelectedIndex = listBox1.IndexFromPoint(e.Location);
+                if (this.listBox1.SelectedIndex != -1)
                 {
-                    listboxContextMenu.Show();
+                    this.listboxContextMenu.Show();
                 }
             }
 
             if (e.Button == MouseButtons.Left)
             {
-                if (listBox1.SelectedIndex != -1)
+                if (this.listBox1.SelectedIndex != -1)
                     this.splitContainer1.Panel2.Controls.Add(new UserControlMiniatures(this.photoViewer, this.photoViewer.getAlbum(listBox1.SelectedItem.ToString())));
+            }
+        }
+
+        private void listBox1_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Delete)
+            {
+                rmAlbum();
+                e.Handled = true;
             }
         }
     }
