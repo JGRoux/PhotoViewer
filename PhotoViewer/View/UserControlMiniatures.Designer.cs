@@ -45,7 +45,6 @@
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(320, 282);
             this.panel1.TabIndex = 0;
-            this.panel1.Paint += new System.Windows.Forms.PaintEventHandler(this.panel1_Paint);
             // 
             // panel2
             // 
@@ -66,7 +65,6 @@
             this.button2.TabIndex = 1;
             this.button2.Text = "Lecture";
             this.button2.UseVisualStyleBackColor = true;
-            this.button2.Click += new System.EventHandler(this.button2_Click);
             // 
             // button1
             // 
@@ -88,7 +86,6 @@
             this.Controls.Add(this.panel1);
             this.Name = "UserControlMiniatures";
             this.Size = new System.Drawing.Size(320, 320);
-            this.Load += new System.EventHandler(this.UserControl1_Load);
             this.panel2.ResumeLayout(false);
             this.ResumeLayout(false);
 

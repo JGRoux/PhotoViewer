@@ -25,8 +25,10 @@ namespace MyPhotoViewer.View
 
             this.photoViewer = photoViewer;
             this.album = album;
+
             this.Anchor = (AnchorStyles.Bottom | AnchorStyles.Right);
             this.Dock = DockStyle.Fill;
+
             if(this.album.PicturesList != null)
             {
                 numberOfPictures = 0;
@@ -34,7 +36,7 @@ namespace MyPhotoViewer.View
                 {
                     numberOfPictures++;
                     this.imageList1.Images.Add(new Bitmap("albums\\" + this.album.Name + "\\" + picture.Name, true));
-                    this.listView1.Items.Add(new ListViewItem()).ImageIndex = numberOfPictures-1;
+                    this.listView1.Items.Add(new ListViewItem(picture.Name)).ImageIndex = numberOfPictures-1;
                 }
             }
             
@@ -51,11 +53,6 @@ namespace MyPhotoViewer.View
         private void listView1_DoubleClick(object sender, MouseEventArgs e)
         {
             this.Controls.Add(new UserControlPhoto(this.album, this.album.PicturesList.ElementAt(listView1.SelectedIndices[0])));
-        }
-
-        private void UserControl1_Load(object sender, EventArgs e)
-        {
-
         }
 
         private void getFiles(string[] files){
@@ -94,16 +91,6 @@ namespace MyPhotoViewer.View
             {
                 this.getFiles(openFileDialog1.FileNames);
             }
-        }
-
-        private void button2_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void panel1_Paint(object sender, PaintEventArgs e)
-        {
-
         }
 
         private void listView1_DragEnter(object sender, DragEventArgs e)
