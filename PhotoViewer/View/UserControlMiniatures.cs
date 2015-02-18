@@ -17,6 +17,7 @@ namespace MyPhotoViewer.View
         ListView listView1 = new ListView();
         Album album;
         PhotoViewer photoViewer;
+        int numberOfPictures = 0;
 
         public UserControlMiniatures(PhotoViewer photoViewer, Album album)
         {
@@ -24,14 +25,14 @@ namespace MyPhotoViewer.View
 
             this.photoViewer = photoViewer;
             this.album = album;
-            int i = 0;
             if(this.album.PicturesList != null)
             {
+                numberOfPictures = 0;
                 foreach (Picture picture in album.PicturesList)
                 {
+                    numberOfPictures++;
                     this.imageList1.Images.Add(new Bitmap("albums\\" + this.album.Name + "\\" + picture.Name, true));
-                    this.listView1.Items.Add(new ListViewItem()).ImageIndex = i;
-                    i++;
+                    this.listView1.Items.Add(new ListViewItem()).ImageIndex = numberOfPictures-1;
                 }
             }
             
@@ -61,8 +62,11 @@ namespace MyPhotoViewer.View
                     // New picture
                     try
                     {
+                        numberOfPictures++;
                         System.IO.File.Copy(file, "albums\\"+this.album.Name+file.Substring(file.LastIndexOf('\\')), true);
                         this.album.addPicture(file.Substring(file.LastIndexOf('\\')+1));
+                        this.imageList1.Images.Add(new Bitmap(file.Substring(file.LastIndexOf('\\') + 1), true));
+                        this.listView1.Items.Add(new ListViewItem()).ImageIndex = numberOfPictures - 1;
                     }
                     catch (Exception ex)
                     {
@@ -86,6 +90,7 @@ namespace MyPhotoViewer.View
             {
                 this.getFiles(openFileDialog1.FileNames);
             }
+            this.Refresh();
         }
 
         private void button2_Click(object sender, EventArgs e)
