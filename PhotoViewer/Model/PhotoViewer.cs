@@ -16,22 +16,23 @@ namespace MyPhotoViewer.Model
             this.AlbumsList = XMLSaver.ReadXml();
         }
 
-        public void addAlbum(String name, String subtitle, DateTime date){
-            this.AlbumsList.Add(new Album(name,subtitle,date)); 
+        public void addAlbum(String name, String subtitle, DateTime date)
+        {
+            this.AlbumsList.Add(new Album(name, subtitle, date));
+        }
 
+        public void delAlbum(String name)
+        {
+            this.AlbumsList.Remove(this.getAlbum(name));
         }
 
         public Album getAlbum(String title)
         {
-            //if(this.AlbumsList.ElementAt(0).Name != null)
-            //{
-                foreach (Album album in this.AlbumsList)
-                {
-                    if (album.Name.Equals(title))
-                        return album;
-                }
-            //}
-            
+            foreach (Album album in this.AlbumsList)
+            {
+                if (album.Name.Equals(title))
+                    return album;
+            }
             return null;
         }
 
