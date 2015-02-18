@@ -123,10 +123,10 @@ namespace MyPhotoViewer
 
         private void listBox1_MouseDown(object sender, MouseEventArgs e)
         {
+            this.listBox1.SelectedIndex = listBox1.IndexFromPoint(e.Location);
             if (e.Button == MouseButtons.Right)
             {
                 //select the item under the mouse pointer
-                this.listBox1.SelectedIndex = listBox1.IndexFromPoint(e.Location);
                 if (this.listBox1.SelectedIndex != -1)
                 {
                     this.listboxContextMenu.Show();
@@ -136,7 +136,11 @@ namespace MyPhotoViewer
             if (e.Button == MouseButtons.Left)
             {
                 if (this.listBox1.SelectedIndex != -1)
+                {
+                    this.splitContainer1.Panel2.Controls.Clear();
                     this.splitContainer1.Panel2.Controls.Add(new UserControlMiniatures(this.photoViewer, this.photoViewer.getAlbum(listBox1.SelectedItem.ToString())));
+                   
+                }
             }
         }
 

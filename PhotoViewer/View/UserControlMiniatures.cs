@@ -39,8 +39,14 @@ namespace MyPhotoViewer.View
                     this.listView1.Items.Add(new ListViewItem(picture.Name)).ImageIndex = numberOfPictures-1;
                 }
             }
-            
+            this.createListVew();
+        }
+
+        private void createListVew()
+        {
             // Add event handlers for the drag & drop functionality
+            if(this.album.PicturesList.Count > 0)
+                this.label1.Hide();
             this.listView1.AllowDrop = true;
             this.listView1.DragDrop += new DragEventHandler(this.listview1_DragDrop);
             this.listView1.DragEnter += new DragEventHandler(listView1_DragEnter);
@@ -66,7 +72,7 @@ namespace MyPhotoViewer.View
                         System.IO.File.Copy(file, "albums\\"+this.album.Name+file.Substring(file.LastIndexOf('\\')), true);
                         this.album.addPicture(file.Substring(file.LastIndexOf('\\')+1));
                         this.imageList1.Images.Add(new Bitmap("albums\\" + this.album.Name + "\\" + file.Substring(file.LastIndexOf('\\') + 1), true));
-                        this.listView1.Items.Add(new ListViewItem()).ImageIndex = numberOfPictures - 1;
+                        this.listView1.Items.Add(new ListViewItem(file.Substring(file.LastIndexOf('\\')+1))).ImageIndex = numberOfPictures - 1;
                         this.Refresh();
                     }
                     catch (Exception ex)
@@ -101,6 +107,18 @@ namespace MyPhotoViewer.View
         private void listview1_DragDrop(object sender, DragEventArgs e)
         {
            this.getFiles((string[])e.Data.GetData(DataFormats.FileDrop));
+        }
+
+        private void label1_DragDrop(object sender, DragEventArgs e)
+        {
+            this.label1.Hide();
+            this.createListVew();
+            this.getFiles((string[])e.Data.GetData(DataFormats.FileDrop));
+        }
+
+        private void label1_DragEnter(object sender, DragEventArgs e)
+        {
+            e.Effect = DragDropEffects.Copy;
         }
     }
 }
