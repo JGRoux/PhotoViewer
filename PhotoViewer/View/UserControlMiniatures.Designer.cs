@@ -91,7 +91,7 @@
             this.button2.BackgroundImage = global::MyPhotoViewer.Properties.Resources.icon_play;
             this.button2.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.button2.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.button2.Location = new System.Drawing.Point(153, 4);
+            this.button2.Location = new System.Drawing.Point(39, 4);
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(30, 30);
             this.button2.TabIndex = 1;
