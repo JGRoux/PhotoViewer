@@ -20,6 +20,7 @@ namespace MyPhotoViewer.View
         int numberOfPictures = 0;
 
         public event EventHandler displayPicture;
+        public event EventHandler Diaporama;
 
         public UserControlMiniatures(PhotoViewer photoViewer, Album album)
         {
@@ -137,6 +138,11 @@ namespace MyPhotoViewer.View
         private void listView1_ColumnClick(object sender, ColumnClickEventArgs e)
         {
 
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            Diaporama(this, e);
         }
         
     }
