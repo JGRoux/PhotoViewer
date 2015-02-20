@@ -52,7 +52,6 @@ namespace MyPhotoViewer.View
             this.listView1.DragDrop += new DragEventHandler(this.listview1_DragDrop);
             this.listView1.DragEnter += new DragEventHandler(listView1_DragEnter);
             this.listView1.Dock = DockStyle.Fill;
-            this.listView1.ima
             this.listView1.LargeImageList = imageList1;
             this.imageList1.ImageSize = new Size(100, 100);
             this.panel1.Controls.Add(listView1);
