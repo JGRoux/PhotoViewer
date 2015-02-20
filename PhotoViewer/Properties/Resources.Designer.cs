@@ -69,5 +69,15 @@ namespace MyPhotoViewer.Properties {
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
+        
+        /// <summary>
+        ///   Recherche une ressource localisée de type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap _1424468312_ic_add_48px_48 {
+            get {
+                object obj = ResourceManager.GetObject("1424468312_ic_add_48px-48", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
     }
 }
