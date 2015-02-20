@@ -19,7 +19,7 @@ namespace MyPhotoViewer.View
             InitializeComponent();
             this.album = album;
             pictureBox1.Image = new Bitmap("albums\\" + this.album.Name + "\\" + picture.Name, true);
-            pictureBox1.SizeMode = PictureBoxSizeMode.StretchImage;
+            pictureBox1.SizeMode = PictureBoxSizeMode.Zoom;
             pictureBox1.Dock = DockStyle.Fill;
             this.panel2.Controls.Add(pictureBox1);
         }
