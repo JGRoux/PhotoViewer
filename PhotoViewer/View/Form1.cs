@@ -9,6 +9,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Windows.Forms.KeyEventArgs;
 
 namespace MyPhotoViewer
 {
@@ -152,6 +153,13 @@ namespace MyPhotoViewer
             UserControlMiniatures Ucm1 = new UserControlMiniatures(this.photoViewer, this.photoViewer.getAlbum(listBox1.SelectedItem.ToString()));
             this.splitContainer1.Panel2.Controls.Add(Ucm1);
             Ucm1.displayPicture += Ucm1_displayPicture;
+            Ucm1.Diaporama += Ucm1_Diaporama;
+        }
+
+        void Ucm1_Diaporama(object sender, EventArgs e)
+        {
+            var Ucm = sender as UserControlMiniatures;
+    
         }
 
         private void Ucm1_displayPicture(object sender, EventArgs e)

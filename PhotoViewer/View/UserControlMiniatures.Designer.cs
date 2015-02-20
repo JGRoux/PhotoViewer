@@ -83,7 +83,7 @@
             this.panel2.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.panel2.Location = new System.Drawing.Point(0, 284);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(389, 36);
+            this.panel2.Size = new System.Drawing.Size(320, 36);
             this.panel2.TabIndex = 1;
             // 
             // button2
@@ -96,6 +96,7 @@
             this.button2.Size = new System.Drawing.Size(30, 30);
             this.button2.TabIndex = 1;
             this.button2.UseVisualStyleBackColor = true;
+            this.button2.Click += new System.EventHandler(this.button2_Click);
             // 
             // button1
             // 
