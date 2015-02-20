@@ -28,11 +28,15 @@ namespace MyPhotoViewer
             this.listboxContextMenu.Opening += new CancelEventHandler(listboxContextMenu_Opening);
             this.listboxContextMenu.ItemClicked += new ToolStripItemClickedEventHandler(listboxContextMenu_ItemClicked);
             this.listBox1.ContextMenuStrip = listboxContextMenu;
+
+            ToolTip toolTip1 = new ToolTip();
+            toolTip1.SetToolTip(this.button1, "Create a new album");
             this.photoViewer = new PhotoViewer();
             foreach (Album album in this.photoViewer.AlbumsList)
             {
                 this.listBox1.Items.Add(album.Name);
             }
+
         }
 
         private void listboxContextMenu_Opening(object sender, CancelEventArgs e)
@@ -154,9 +158,18 @@ namespace MyPhotoViewer
         {
             var Ucm = sender as UserControlMiniatures;
             this.splitContainer1.Panel2.Controls.Clear();
-            UserControlPhoto userControlPhoto = new UserControlPhoto(Ucm.album, Ucm.album.PicturesList.ElementAt(Ucm.listView1.SelectedIndices[0]));
-            userControlPhoto.Dock = DockStyle.Fill;
-            this.splitContainer1.Panel2.Controls.Add(userControlPhoto);
+            UserControlPhoto Ucp = new UserControlPhoto(Ucm.album, Ucm.listView1.SelectedIndices[0]);
+            Ucp.Dock = DockStyle.Fill;
+            this.splitContainer1.Panel2.Controls.Add(Ucp);
+            Ucp.back += Ucp_back;
+        }
+
+        private void Ucp_back(object sender, EventArgs e)
+        {
+            var Ucp = sender as UserControlPhoto;
+            this.splitContainer1.Panel2.Controls.Clear();
+            UserControlMiniatures Ucm1 = new UserControlMiniatures(this.photoViewer, this.photoViewer.getAlbum(listBox1.SelectedItem.ToString()));
+            this.splitContainer1.Panel2.Controls.Add(Ucm1);
         }
 
         private void listBox1_KeyUp(object sender, KeyEventArgs e)

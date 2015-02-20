@@ -14,6 +14,7 @@ namespace MyPhotoViewer.View
     public partial class UserControlMiniatures : UserControl
     {
         ImageList imageList1 = new ImageList();
+                
         public Album album { get; set; }
         PhotoViewer photoViewer;
         int numberOfPictures = 0;
@@ -23,6 +24,12 @@ namespace MyPhotoViewer.View
         public UserControlMiniatures(PhotoViewer photoViewer, Album album)
         {
             InitializeComponent();
+            imageList1.ColorDepth = ColorDepth.Depth32Bit;
+
+            ToolTip toolTip1 = new ToolTip();
+            toolTip1.SetToolTip(this.button1, "Add a photo to this album");
+            ToolTip toolTip2 = new ToolTip();
+            toolTip2.SetToolTip(this.button2, "Diaporama");
 
             this.photoViewer = photoViewer;
             this.album = album;
@@ -127,12 +134,10 @@ namespace MyPhotoViewer.View
 
         }
 
-
         private void listView1_ColumnClick(object sender, ColumnClickEventArgs e)
         {
 
         }
-
         
     }
 }
