@@ -14,10 +14,11 @@ namespace MyPhotoViewer.View
     public partial class UserControlMiniatures : UserControl
     {
         ImageList imageList1 = new ImageList();
-        ListView listView1 = new ListView();
-        Album album;
+        public Album album { get; set; }
         PhotoViewer photoViewer;
         int numberOfPictures = 0;
+
+        public event EventHandler displayPicture;
 
         public UserControlMiniatures(PhotoViewer photoViewer, Album album)
         {
@@ -56,9 +57,9 @@ namespace MyPhotoViewer.View
             this.panel1.Controls.Add(listView1);
         }
 
-        private void listView1_DoubleClick(object sender, MouseEventArgs e)
+        private void listView1_DoubleClick(object sender, EventArgs e)
         {
-            this.Controls.Add(new UserControlPhoto(this.album, this.album.PicturesList.ElementAt(listView1.SelectedIndices[0])));
+            displayPicture(this, e);
         }
 
         private void getFiles(string[] files){
@@ -120,5 +121,18 @@ namespace MyPhotoViewer.View
         {
             e.Effect = DragDropEffects.Copy;
         }
+
+        private void label1_DoubleClick(object sender, EventArgs e)
+        {
+
+        }
+
+
+        private void listView1_ColumnClick(object sender, ColumnClickEventArgs e)
+        {
+
+        }
+
+        
     }
 }
