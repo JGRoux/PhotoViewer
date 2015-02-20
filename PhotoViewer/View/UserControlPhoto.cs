@@ -12,7 +12,9 @@ namespace MyPhotoViewer.View
 {
     public partial class UserControlPhoto : UserControl
     {
-        Album album;
+        public Album album {get; set;}
+
+        public event EventHandler back;
 
         public UserControlPhoto(Album album, Picture picture)
         {
@@ -25,7 +27,7 @@ namespace MyPhotoViewer.View
 
         private void button1_Click(object sender, EventArgs e)
         {
-
+            back(this, e);
         }
 
         private void pictureBox1_Click(object sender, EventArgs e)

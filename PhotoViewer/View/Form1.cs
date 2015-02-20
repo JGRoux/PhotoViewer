@@ -149,7 +149,17 @@ namespace MyPhotoViewer
         {
             var Ucm = sender as UserControlMiniatures;
             this.splitContainer1.Panel2.Controls.Clear();
-            this.splitContainer1.Panel2.Controls.Add(new UserControlPhoto(Ucm.album, Ucm.album.PicturesList.ElementAt(Ucm.listView1.SelectedIndices[0])));
+            UserControlPhoto Ucp = new UserControlPhoto(Ucm.album, Ucm.album.PicturesList.ElementAt(Ucm.listView1.SelectedIndices[0]));
+            this.splitContainer1.Panel2.Controls.Add(Ucp);
+            Ucp.back += Ucp_back;
+        }
+
+        private void Ucp_back(object sender, EventArgs e)
+        {
+            var Ucp = sender as UserControlPhoto;
+            this.splitContainer1.Panel2.Controls.Clear();
+            UserControlMiniatures Ucm1 = new UserControlMiniatures(this.photoViewer, Ucp.album);
+            this.splitContainer1.Panel2.Controls.Add(Ucm1);
         }
 
         private void listBox1_KeyDown(object sender, KeyEventArgs e)

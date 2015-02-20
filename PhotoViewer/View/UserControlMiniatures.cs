@@ -127,12 +127,10 @@ namespace MyPhotoViewer.View
 
         }
 
-
         private void listView1_ColumnClick(object sender, ColumnClickEventArgs e)
         {
 
         }
-
         
     }
 }
