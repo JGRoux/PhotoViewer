@@ -12,7 +12,6 @@ namespace MyPhotoViewer.View
 {
     public partial class UserControlPhoto : UserControl
     {
-        PictureBox pictureBox1 = new PictureBox();
         Album album;
 
         public UserControlPhoto(Album album, Picture picture)
