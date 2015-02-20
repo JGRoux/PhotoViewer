@@ -113,6 +113,30 @@
   <ItemGroup>
     <None Include="Resources\1424468312_ic_add_48px-48.png" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\icon_delete.bmp" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\1424468580_ic_delete_48px-48.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\ic_folder_open_48px-48.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\ic_play_arrow_48px-48.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\1424468650_ic_keyboard_arrow_left_48px-48.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\ic_keyboard_arrow_right_48px-48.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\ic_arrow_back_48px-48.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\ic_info_outline_48px-48.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
