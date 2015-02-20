@@ -12,8 +12,8 @@ namespace MyPhotoViewer.View
 {
     public partial class UserControlPhoto : UserControl
     {
-        public Album album {get; set;}
-        public int indice { get; set;}
+        public Album album { get; set; }
+        public int indice { get; set; }
 
         public event EventHandler back;
 
@@ -52,7 +52,17 @@ namespace MyPhotoViewer.View
 
         private void button2_Click(object sender, EventArgs e)
         {
-            if(this.indice == 0)
+            this.nextPicture();   
+        }
+
+        private void button3_Click(object sender, EventArgs e)
+        {
+            this.previousPicture();
+        }
+
+        private void nextPicture()
+        {
+            if (this.indice == 0)
             {
                 this.indice = this.album.PicturesList.Count - 1;
             }
@@ -60,11 +70,11 @@ namespace MyPhotoViewer.View
             {
                 this.indice--;
             }
-            
+
             pictureBox1.Image = new Bitmap("albums\\" + this.album.Name + "\\" + this.album.PicturesList.ElementAt(indice).Name, true);
         }
 
-        private void button3_Click(object sender, EventArgs e)
+        private void previousPicture()
         {
             if (this.indice == this.album.PicturesList.Count - 1)
             {
@@ -75,6 +85,23 @@ namespace MyPhotoViewer.View
                 this.indice++;
             }
             pictureBox1.Image = new Bitmap("albums\\" + this.album.Name + "\\" + this.album.PicturesList.ElementAt(indice).Name, true);
+        }
+
+        protected override bool ProcessCmdKey(ref Message msg, Keys keyData)
+        {
+            if (keyData == Keys.Left)
+            {
+                this.previousPicture();
+                return true;    // indicate that you handled this keystroke
+            }
+            else if (keyData == Keys.Right)
+            {
+                this.nextPicture();
+                return true;
+            }
+
+            // Call the base class
+            return base.ProcessCmdKey(ref msg, keyData);
         }
     }
 }

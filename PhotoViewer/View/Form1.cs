@@ -139,19 +139,19 @@ namespace MyPhotoViewer
 
             if (e.Button == MouseButtons.Left)
             {
-                if (this.listBox1.SelectedIndex != -1)
-                {
-                    this.displayAlbumsMiniatures();
-                }
+                this.displayAlbumsMiniatures();
             }
         }
 
         private void displayAlbumsMiniatures()
         {
-            this.splitContainer1.Panel2.Controls.Clear();
-            UserControlMiniatures Ucm1 = new UserControlMiniatures(this.photoViewer, this.photoViewer.getAlbum(listBox1.SelectedItem.ToString()));
-            this.splitContainer1.Panel2.Controls.Add(Ucm1);
-            Ucm1.displayPicture += Ucm1_displayPicture;
+            if (this.listBox1.SelectedIndex != -1)
+            {
+                this.splitContainer1.Panel2.Controls.Clear();
+                UserControlMiniatures Ucm1 = new UserControlMiniatures(this.photoViewer, this.photoViewer.getAlbum(listBox1.SelectedItem.ToString()));
+                this.splitContainer1.Panel2.Controls.Add(Ucm1);
+                Ucm1.displayPicture += Ucm1_displayPicture;
+            }
         }
 
         private void Ucm1_displayPicture(object sender, EventArgs e)
@@ -172,7 +172,7 @@ namespace MyPhotoViewer
             this.splitContainer1.Panel2.Controls.Add(Ucm1);
         }
 
-        private void listBox1_KeyUp(object sender, KeyEventArgs e)
+        private void listBox1_KeyDown(object sender, KeyEventArgs e)
         {
             if (e.KeyCode == Keys.Delete)
             {
@@ -185,7 +185,10 @@ namespace MyPhotoViewer
             }
             else if (e.KeyCode == Keys.Up)
             {
-                this.listBox1.SelectedIndex = Math.Abs(this.listBox1.SelectedIndex - 1) % this.listBox1.Items.Count;
+                if(this.listBox1.SelectedIndex == 0)
+                    this.listBox1.SelectedIndex = this.listBox1.Items.Count - 1;
+                else
+                    this.listBox1.SelectedIndex = (this.listBox1.SelectedIndex - 1) % this.listBox1.Items.Count;
                 displayAlbumsMiniatures();
             }
             e.Handled = true;
