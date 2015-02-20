@@ -28,11 +28,15 @@ namespace MyPhotoViewer
             this.listboxContextMenu.Opening += new CancelEventHandler(listboxContextMenu_Opening);
             this.listboxContextMenu.ItemClicked += new ToolStripItemClickedEventHandler(listboxContextMenu_ItemClicked);
             this.listBox1.ContextMenuStrip = listboxContextMenu;
+
+            ToolTip toolTip1 = new ToolTip();
+            toolTip1.SetToolTip(this.button1, "Create a new album");
             this.photoViewer = new PhotoViewer();
             foreach (Album album in this.photoViewer.AlbumsList)
             {
                 this.listBox1.Items.Add(album.Name);
             }
+
         }
 
         private void listboxContextMenu_Opening(object sender, CancelEventArgs e)

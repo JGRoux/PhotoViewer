@@ -26,6 +26,11 @@ namespace MyPhotoViewer.View
             InitializeComponent();
             imageList1.ColorDepth = ColorDepth.Depth32Bit;
 
+            ToolTip toolTip1 = new ToolTip();
+            toolTip1.SetToolTip(this.button1, "Add a photo to this album");
+            ToolTip toolTip2 = new ToolTip();
+            toolTip2.SetToolTip(this.button2, "Diaporama");
+
             this.photoViewer = photoViewer;
             this.album = album;
 

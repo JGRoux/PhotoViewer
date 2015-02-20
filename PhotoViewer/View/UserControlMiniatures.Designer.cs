@@ -83,7 +83,7 @@
             this.panel2.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.panel2.Location = new System.Drawing.Point(0, 284);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(320, 36);
+            this.panel2.Size = new System.Drawing.Size(389, 36);
             this.panel2.TabIndex = 1;
             // 
             // button2
@@ -91,7 +91,7 @@
             this.button2.BackgroundImage = global::MyPhotoViewer.Properties.Resources.icon_play;
             this.button2.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.button2.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.button2.Location = new System.Drawing.Point(153, 4);
+            this.button2.Location = new System.Drawing.Point(236, 4);
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(30, 30);
             this.button2.TabIndex = 1;
@@ -102,7 +102,7 @@
             this.button1.BackgroundImage = global::MyPhotoViewer.Properties.Resources.icon_add;
             this.button1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.button1.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.button1.Location = new System.Drawing.Point(3, 4);
+            this.button1.Location = new System.Drawing.Point(64, 4);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(30, 30);
             this.button1.TabIndex = 0;

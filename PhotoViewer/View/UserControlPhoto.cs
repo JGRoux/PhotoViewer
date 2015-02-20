@@ -21,6 +21,18 @@ namespace MyPhotoViewer.View
         {
             InitializeComponent();
             this.album = album;
+
+            ToolTip toolTip1 = new ToolTip();
+            toolTip1.SetToolTip(this.button1, "Back to the album");
+            ToolTip toolTip2 = new ToolTip();
+            toolTip2.SetToolTip(this.button2, "Previous picture");
+            ToolTip toolTip3 = new ToolTip();
+            toolTip3.SetToolTip(this.button3, "Next Picture");
+            ToolTip toolTip4 = new ToolTip();
+            toolTip4.SetToolTip(this.button4, "Information about this picture");
+            ToolTip toolTip5 = new ToolTip();
+            toolTip5.SetToolTip(this.button5, "Delete this picture");
+
             pictureBox1.Image = new Bitmap("albums\\" + this.album.Name + "\\" + this.album.PicturesList.ElementAt(indice).Name, true);
             pictureBox1.SizeMode = PictureBoxSizeMode.Zoom;
             pictureBox1.Dock = DockStyle.Fill;
