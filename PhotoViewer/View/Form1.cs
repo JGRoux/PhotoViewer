@@ -160,6 +160,9 @@ namespace MyPhotoViewer
             this.splitContainer1.Panel2.Controls.Clear();
             UserControlMiniatures Ucm1 = new UserControlMiniatures(this.photoViewer, Ucp.album);
             this.splitContainer1.Panel2.Controls.Add(Ucm1);
+            UserControlPhoto userControlPhoto = new UserControlPhoto(Ucm.album, Ucm.album.PicturesList.ElementAt(Ucm.listView1.SelectedIndices[0]));
+            userControlPhoto.Dock = DockStyle.Fill;
+            this.splitContainer1.Panel2.Controls.Add(userControlPhoto);
         }
 
         private void listBox1_KeyDown(object sender, KeyEventArgs e)
