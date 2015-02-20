@@ -12,7 +12,6 @@ namespace MyPhotoViewer.View
 {
     public partial class UserControlPhoto : UserControl
     {
-        PictureBox pictureBox1 = new PictureBox();
         Album album;
 
         public UserControlPhoto(Album album, Picture picture)
@@ -20,7 +19,7 @@ namespace MyPhotoViewer.View
             InitializeComponent();
             this.album = album;
             pictureBox1.Image = new Bitmap("albums\\" + this.album.Name + "\\" + picture.Name, true);
-            pictureBox1.SizeMode = Zoom;
+
             this.panel2.Controls.Add(pictureBox1);
         }
 
