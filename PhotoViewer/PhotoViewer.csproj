@@ -47,6 +47,7 @@
     <Compile Include="Controller\XMLSaver.cs" />
     <Compile Include="Model\Album.cs" />
     <Compile Include="Model\PhotoViewer.cs" />
+    <Compile Include="View\DependencyObject.cs" />
     <Compile Include="View\DialogAlbumName.cs">
       <SubType>Form</SubType>
     </Compile>

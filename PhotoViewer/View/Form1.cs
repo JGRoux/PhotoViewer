@@ -138,10 +138,18 @@ namespace MyPhotoViewer
                 if (this.listBox1.SelectedIndex != -1)
                 {
                     this.splitContainer1.Panel2.Controls.Clear();
-                    this.splitContainer1.Panel2.Controls.Add(new UserControlMiniatures(this.photoViewer, this.photoViewer.getAlbum(listBox1.SelectedItem.ToString())));
-                   
+                    UserControlMiniatures Ucm1 = new UserControlMiniatures(this.photoViewer, this.photoViewer.getAlbum(listBox1.SelectedItem.ToString()));
+                    this.splitContainer1.Panel2.Controls.Add(Ucm1);
+                    Ucm1.displayPicture += Ucm1_displayPicture;
                 }
             }
+        }
+
+        private void Ucm1_displayPicture(object sender, EventArgs e)
+        {
+            var Ucm = sender as UserControlMiniatures;
+            this.splitContainer1.Panel2.Controls.Clear();
+            this.splitContainer1.Panel2.Controls.Add(new UserControlPhoto(Ucm.album, Ucm.album.PicturesList.ElementAt(Ucm.listView1.SelectedIndices[0])));
         }
 
         private void listBox1_KeyDown(object sender, KeyEventArgs e)
