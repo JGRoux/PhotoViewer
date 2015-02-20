@@ -14,6 +14,7 @@ namespace MyPhotoViewer.View
     public partial class UserControlMiniatures : UserControl
     {
         ImageList imageList1 = new ImageList();
+                
         public Album album { get; set; }
         PhotoViewer photoViewer;
         int numberOfPictures = 0;
@@ -23,6 +24,7 @@ namespace MyPhotoViewer.View
         public UserControlMiniatures(PhotoViewer photoViewer, Album album)
         {
             InitializeComponent();
+            imageList1.ColorDepth = ColorDepth.Depth32Bit;
 
             this.photoViewer = photoViewer;
             this.album = album;

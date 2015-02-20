@@ -149,7 +149,8 @@ namespace MyPhotoViewer
         {
             var Ucm = sender as UserControlMiniatures;
             this.splitContainer1.Panel2.Controls.Clear();
-            UserControlPhoto Ucp = new UserControlPhoto(Ucm.album, Ucm.album.PicturesList.ElementAt(Ucm.listView1.SelectedIndices[0]));
+            UserControlPhoto Ucp = new UserControlPhoto(Ucm.album, Ucm.listView1.SelectedIndices[0]);
+            Ucp.Dock = DockStyle.Fill;
             this.splitContainer1.Panel2.Controls.Add(Ucp);
             Ucp.back += Ucp_back;
         }
@@ -158,11 +159,8 @@ namespace MyPhotoViewer
         {
             var Ucp = sender as UserControlPhoto;
             this.splitContainer1.Panel2.Controls.Clear();
-            UserControlMiniatures Ucm1 = new UserControlMiniatures(this.photoViewer, Ucp.album);
+            UserControlMiniatures Ucm1 = new UserControlMiniatures(this.photoViewer, this.photoViewer.getAlbum(listBox1.SelectedItem.ToString()));
             this.splitContainer1.Panel2.Controls.Add(Ucm1);
-            UserControlPhoto userControlPhoto = new UserControlPhoto(Ucm.album, Ucm.album.PicturesList.ElementAt(Ucm.listView1.SelectedIndices[0]));
-            userControlPhoto.Dock = DockStyle.Fill;
-            this.splitContainer1.Panel2.Controls.Add(userControlPhoto);
         }
 
         private void listBox1_KeyDown(object sender, KeyEventArgs e)
