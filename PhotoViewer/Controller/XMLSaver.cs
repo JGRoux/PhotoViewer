@@ -12,6 +12,7 @@ namespace MyPhotoViewer.Controller
     {
         private static String filename = "infos.xml";
 
+        // Write album list to xml file
         public static void WriteXml(List<Album> albums)
         {
             XmlSerializer xs = new XmlSerializer(typeof(List<Album>));
@@ -21,6 +22,7 @@ namespace MyPhotoViewer.Controller
             }
         }
 
+        // Read xml file and return album list
         public static List<Album> ReadXml()
         {
             List<Album> albums = null;

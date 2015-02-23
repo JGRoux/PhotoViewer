@@ -29,35 +29,37 @@
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(DialogAlbumName));
-            this.textBox = new System.Windows.Forms.TextBox();
-            this.button1 = new System.Windows.Forms.Button();
+            this.txtBxAlbumName = new System.Windows.Forms.TextBox();
+            this.btnOk = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
-            // textBox
+            // txtBxAlbumName
             // 
-            this.textBox.Location = new System.Drawing.Point(12, 12);
-            this.textBox.Name = "textBox";
-            this.textBox.Size = new System.Drawing.Size(260, 20);
-            this.textBox.TabIndex = 0;
-            this.textBox.TextChanged += new System.EventHandler(this.textBox_TextChanged);
+            this.txtBxAlbumName.Location = new System.Drawing.Point(12, 12);
+            this.txtBxAlbumName.Name = "txtBxAlbumName";
+            this.txtBxAlbumName.Size = new System.Drawing.Size(260, 20);
+            this.txtBxAlbumName.TabIndex = 0;
+            this.txtBxAlbumName.TextChanged += new System.EventHandler(this.textBox_TextChanged);
             // 
-            // button1
+            // btnOk
             // 
-            this.button1.DialogResult = System.Windows.Forms.DialogResult.OK;
-            this.button1.Location = new System.Drawing.Point(197, 38);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(75, 23);
-            this.button1.TabIndex = 1;
-            this.button1.Text = "Valider";
-            this.button1.UseVisualStyleBackColor = true;
+            this.btnOk.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnOk.DialogResult = System.Windows.Forms.DialogResult.OK;
+            this.btnOk.Location = new System.Drawing.Point(197, 38);
+            this.btnOk.Name = "btnOk";
+            this.btnOk.Size = new System.Drawing.Size(75, 23);
+            this.btnOk.TabIndex = 1;
+            this.btnOk.Text = "Valider";
+            this.btnOk.UseVisualStyleBackColor = true;
             // 
             // DialogAlbumName
             // 
+            this.AcceptButton = this.btnOk;
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(284, 72);
-            this.Controls.Add(this.button1);
-            this.Controls.Add(this.textBox);
+            this.Controls.Add(this.btnOk);
+            this.Controls.Add(this.txtBxAlbumName);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "DialogAlbumName";
             this.Text = "Album name";
@@ -68,7 +70,7 @@
 
         #endregion
 
-        private System.Windows.Forms.TextBox textBox;
-        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.TextBox txtBxAlbumName;
+        private System.Windows.Forms.Button btnOk;
     }
 }

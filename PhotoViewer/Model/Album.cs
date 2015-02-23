@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.IO;
 
 namespace MyPhotoViewer
 {
@@ -10,28 +11,39 @@ namespace MyPhotoViewer
     public class Album
     {
         public String Name { get; set; }
-        public String Subtitle { get; set; }
         public DateTime Date { get; set; }
-        public String[] Keywords { get; set; }
         public List<Picture> PicturesList;
 
         public Album()
         {
             this.PicturesList = new List<Picture>();
-            this.Keywords = new String[5];
         }
 
-        public Album(String Title, String Subtitle, DateTime Date):this()
+        public Album(String title, DateTime date):this()
         {
-            this.Name=Title;
-            this.Subtitle=Subtitle;
-            this.Date=Date;
+            this.Name=title;
+            this.Date=date;
         }
 
-        public void addPicture(String name){
-            this.PicturesList.Add(new Picture(name));
+        // Add a picture to the album
+        public void addPicture(String pictureName){
+            String path = "albums\\" + this.Name + "\\" + pictureName;
+            this.PicturesList.Add(new Picture(pictureName,File.GetLastWriteTime(path), new FileInfo(path).Length));
         }
 
+        // Remove a picture from the album
+        public void removePicture(String name)
+        {
+            foreach (Picture picture in this.PicturesList){
+                if (picture.Name.Equals(name))
+                {
+                    this.PicturesList.Remove(picture);
+                    return;
+                }
+            }
+        }
+
+        // Get a picture from the album
         public Picture getPicture(String name)
         {
             foreach (Picture picture in this.PicturesList)

@@ -23,7 +23,7 @@ namespace MyPhotoViewer.View
         }
 
         public TextBox getTextBox(){
-            return this.textBox;
+            return this.txtBxAlbumName;
         }
     }
 }

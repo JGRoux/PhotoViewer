@@ -28,111 +28,175 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.panel1 = new System.Windows.Forms.Panel();
-            this.listView1 = new System.Windows.Forms.ListView();
-            this.label1 = new System.Windows.Forms.Label();
-            this.panel2 = new System.Windows.Forms.Panel();
-            this.button2 = new System.Windows.Forms.Button();
-            this.button1 = new System.Windows.Forms.Button();
-            this.panel1.SuspendLayout();
-            this.panel2.SuspendLayout();
+            this.panelTopCenter = new System.Windows.Forms.Panel();
+            this.panelCenter = new System.Windows.Forms.Panel();
+            this.listViewMiniatures = new System.Windows.Forms.ListView();
+            this.panelTop = new System.Windows.Forms.Panel();
+            this.lblAlbumName = new System.Windows.Forms.Label();
+            this.lblNoPicture = new System.Windows.Forms.Label();
+            this.panelBottom = new System.Windows.Forms.Panel();
+            this.btnDeletePictures = new System.Windows.Forms.Button();
+            this.btnDiaporama = new System.Windows.Forms.Button();
+            this.btnAddPictures = new System.Windows.Forms.Button();
+            this.panelTopCenter.SuspendLayout();
+            this.panelCenter.SuspendLayout();
+            this.panelTop.SuspendLayout();
+            this.panelBottom.SuspendLayout();
             this.SuspendLayout();
             // 
-            // panel1
+            // panelTopCenter
             // 
-            this.panel1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            this.panelTopCenter.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.panel1.Controls.Add(this.listView1);
-            this.panel1.Controls.Add(this.label1);
-            this.panel1.Location = new System.Drawing.Point(0, 0);
-            this.panel1.Margin = new System.Windows.Forms.Padding(0);
-            this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(320, 282);
-            this.panel1.TabIndex = 0;
+            this.panelTopCenter.Controls.Add(this.panelCenter);
+            this.panelTopCenter.Controls.Add(this.panelTop);
+            this.panelTopCenter.Controls.Add(this.lblNoPicture);
+            this.panelTopCenter.Location = new System.Drawing.Point(0, 0);
+            this.panelTopCenter.Margin = new System.Windows.Forms.Padding(0);
+            this.panelTopCenter.Name = "panelTopCenter";
+            this.panelTopCenter.Size = new System.Drawing.Size(320, 282);
+            this.panelTopCenter.TabIndex = 0;
             // 
-            // listView1
+            // panelCenter
             // 
-            this.listView1.Location = new System.Drawing.Point(0, 0);
-            this.listView1.Name = "listView1";
-            this.listView1.Size = new System.Drawing.Size(320, 282);
-            this.listView1.TabIndex = 1;
-            this.listView1.UseCompatibleStateImageBehavior = false;
-            this.listView1.ColumnClick += new System.Windows.Forms.ColumnClickEventHandler(this.listView1_ColumnClick);
-            this.listView1.DoubleClick += new System.EventHandler(this.listView1_DoubleClick);
+            this.panelCenter.BackColor = System.Drawing.SystemColors.Control;
+            this.panelCenter.Controls.Add(this.listViewMiniatures);
+            this.panelCenter.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.panelCenter.Location = new System.Drawing.Point(0, 36);
+            this.panelCenter.Name = "panelCenter";
+            this.panelCenter.Size = new System.Drawing.Size(320, 246);
+            this.panelCenter.TabIndex = 3;
             // 
-            // label1
+            // listViewMiniatures
             // 
-            this.label1.AllowDrop = true;
-            this.label1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.label1.Location = new System.Drawing.Point(0, 0);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(320, 282);
-            this.label1.TabIndex = 0;
-            this.label1.Text = "There is no pictures in this album yet.\r\nDrag&Drop pictures here or use the butto" +
+            this.listViewMiniatures.AllowDrop = true;
+            this.listViewMiniatures.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.listViewMiniatures.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.listViewMiniatures.Location = new System.Drawing.Point(0, 0);
+            this.listViewMiniatures.Margin = new System.Windows.Forms.Padding(0);
+            this.listViewMiniatures.Name = "listViewMiniatures";
+            this.listViewMiniatures.Size = new System.Drawing.Size(320, 246);
+            this.listViewMiniatures.TabIndex = 0;
+            this.listViewMiniatures.UseCompatibleStateImageBehavior = false;
+            this.listViewMiniatures.DragDrop += new System.Windows.Forms.DragEventHandler(this.picture_DragDrop);
+            this.listViewMiniatures.DragEnter += new System.Windows.Forms.DragEventHandler(this.picture_DragEnter);
+            this.listViewMiniatures.DoubleClick += new System.EventHandler(this.listView_DoubleClick);
+            this.listViewMiniatures.MouseMove += new System.Windows.Forms.MouseEventHandler(this.listView_MouseMove);
+            // 
+            // panelTop
+            // 
+            this.panelTop.Controls.Add(this.lblAlbumName);
+            this.panelTop.Cursor = System.Windows.Forms.Cursors.Arrow;
+            this.panelTop.Dock = System.Windows.Forms.DockStyle.Top;
+            this.panelTop.Location = new System.Drawing.Point(0, 0);
+            this.panelTop.Name = "panelTop";
+            this.panelTop.Size = new System.Drawing.Size(320, 36);
+            this.panelTop.TabIndex = 2;
+            // 
+            // lblAlbumName
+            // 
+            this.lblAlbumName.AutoSize = true;
+            this.lblAlbumName.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblAlbumName.Location = new System.Drawing.Point(3, 10);
+            this.lblAlbumName.Name = "lblAlbumName";
+            this.lblAlbumName.Size = new System.Drawing.Size(0, 16);
+            this.lblAlbumName.TabIndex = 0;
+            // 
+            // lblNoPicture
+            // 
+            this.lblNoPicture.AllowDrop = true;
+            this.lblNoPicture.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.lblNoPicture.Location = new System.Drawing.Point(0, 0);
+            this.lblNoPicture.Name = "lblNoPicture";
+            this.lblNoPicture.Size = new System.Drawing.Size(320, 282);
+            this.lblNoPicture.TabIndex = 0;
+            this.lblNoPicture.Text = "There is no pictures in this album yet.\r\nDrag&Drop pictures here or use the butto" +
     "n below.";
-            this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            this.label1.DragDrop += new System.Windows.Forms.DragEventHandler(this.label1_DragDrop);
-            this.label1.DragEnter += new System.Windows.Forms.DragEventHandler(this.label1_DragEnter);
-            this.label1.DoubleClick += new System.EventHandler(this.label1_DoubleClick);
+            this.lblNoPicture.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.lblNoPicture.DragDrop += new System.Windows.Forms.DragEventHandler(this.picture_DragDrop);
+            this.lblNoPicture.DragEnter += new System.Windows.Forms.DragEventHandler(this.picture_DragEnter);
             // 
-            // panel2
+            // panelBottom
             // 
-            this.panel2.Controls.Add(this.button2);
-            this.panel2.Controls.Add(this.button1);
-            this.panel2.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.panel2.Location = new System.Drawing.Point(0, 284);
-            this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(320, 36);
-            this.panel2.TabIndex = 1;
+            this.panelBottom.Controls.Add(this.btnDeletePictures);
+            this.panelBottom.Controls.Add(this.btnDiaporama);
+            this.panelBottom.Controls.Add(this.btnAddPictures);
+            this.panelBottom.Cursor = System.Windows.Forms.Cursors.Arrow;
+            this.panelBottom.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.panelBottom.Location = new System.Drawing.Point(0, 284);
+            this.panelBottom.Name = "panelBottom";
+            this.panelBottom.Size = new System.Drawing.Size(320, 36);
+            this.panelBottom.TabIndex = 1;
             // 
-            // button2
+            // btnDeletePictures
             // 
-            this.button2.BackgroundImage = global::MyPhotoViewer.Properties.Resources.icon_play;
-            this.button2.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.button2.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.button2.Location = new System.Drawing.Point(39, 4);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(30, 30);
-            this.button2.TabIndex = 1;
-            this.button2.UseVisualStyleBackColor = true;
-            this.button2.Click += new System.EventHandler(this.button2_Click);
+            this.btnDeletePictures.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnDeletePictures.BackgroundImage = global::MyPhotoViewer.Properties.Resources.icon_delete;
+            this.btnDeletePictures.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.btnDeletePictures.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnDeletePictures.Location = new System.Drawing.Point(287, 4);
+            this.btnDeletePictures.Name = "btnDeletePictures";
+            this.btnDeletePictures.Size = new System.Drawing.Size(30, 30);
+            this.btnDeletePictures.TabIndex = 2;
+            this.btnDeletePictures.UseVisualStyleBackColor = true;
+            this.btnDeletePictures.Click += new System.EventHandler(this.btnDeletePictures_Click);
             // 
-            // button1
+            // btnDiaporama
             // 
-            this.button1.BackgroundImage = global::MyPhotoViewer.Properties.Resources.icon_add;
-            this.button1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.button1.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.button1.Location = new System.Drawing.Point(3, 4);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(30, 30);
-            this.button1.TabIndex = 0;
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
+            this.btnDiaporama.BackgroundImage = global::MyPhotoViewer.Properties.Resources.icon_play;
+            this.btnDiaporama.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.btnDiaporama.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnDiaporama.Location = new System.Drawing.Point(39, 4);
+            this.btnDiaporama.Name = "btnDiaporama";
+            this.btnDiaporama.Size = new System.Drawing.Size(30, 30);
+            this.btnDiaporama.TabIndex = 1;
+            this.btnDiaporama.UseVisualStyleBackColor = true;
+            this.btnDiaporama.Click += new System.EventHandler(this.btnDiaporama_Click);
+            // 
+            // btnAddPictures
+            // 
+            this.btnAddPictures.BackgroundImage = global::MyPhotoViewer.Properties.Resources.icon_add;
+            this.btnAddPictures.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.btnAddPictures.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnAddPictures.Location = new System.Drawing.Point(3, 4);
+            this.btnAddPictures.Name = "btnAddPictures";
+            this.btnAddPictures.Size = new System.Drawing.Size(30, 30);
+            this.btnAddPictures.TabIndex = 0;
+            this.btnAddPictures.UseVisualStyleBackColor = true;
+            this.btnAddPictures.Click += new System.EventHandler(this.btnAddPictures_Click);
             // 
             // UserControlMiniatures
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.Controls.Add(this.panel2);
-            this.Controls.Add(this.panel1);
+            this.Controls.Add(this.panelBottom);
+            this.Controls.Add(this.panelTopCenter);
             this.Name = "UserControlMiniatures";
             this.Size = new System.Drawing.Size(320, 320);
-            this.panel1.ResumeLayout(false);
-            this.panel2.ResumeLayout(false);
+            this.Load += new System.EventHandler(this.UserControlMiniatures_Load);
+            this.panelTopCenter.ResumeLayout(false);
+            this.panelCenter.ResumeLayout(false);
+            this.panelTop.ResumeLayout(false);
+            this.panelTop.PerformLayout();
+            this.panelBottom.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
 
         #endregion
 
-        private System.Windows.Forms.Panel panel1;
-        private System.Windows.Forms.Panel panel2;
-        private System.Windows.Forms.Button button1;
-        private System.Windows.Forms.Label label1;
-        public System.Windows.Forms.ListView listView1;
-        private System.Windows.Forms.Button button2;
+        private System.Windows.Forms.Panel panelTopCenter;
+        private System.Windows.Forms.Panel panelBottom;
+        private System.Windows.Forms.Button btnAddPictures;
+        private System.Windows.Forms.Label lblNoPicture;
+        private System.Windows.Forms.Button btnDiaporama;
+        private System.Windows.Forms.Button btnDeletePictures;
+        private System.Windows.Forms.Panel panelTop;
+        private System.Windows.Forms.Label lblAlbumName;
+        private System.Windows.Forms.Panel panelCenter;
+        public System.Windows.Forms.ListView listViewMiniatures;
 
     }
 }

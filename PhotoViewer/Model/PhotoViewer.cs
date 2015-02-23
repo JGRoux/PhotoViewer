@@ -16,16 +16,19 @@ namespace MyPhotoViewer.Model
             this.AlbumsList = XMLSaver.ReadXml();
         }
 
-        public void addAlbum(String name, String subtitle, DateTime date)
+        // Add album to the photoviewer
+        public void addAlbum(String name, DateTime date)
         {
-            this.AlbumsList.Add(new Album(name, subtitle, date));
+            this.AlbumsList.Add(new Album(name, date));
         }
 
+        // Delete album from the photoviewer
         public void delAlbum(String name)
         {
             this.AlbumsList.Remove(this.getAlbum(name));
         }
 
+        // Get album from the photoviewer
         public Album getAlbum(String title)
         {
             foreach (Album album in this.AlbumsList)
@@ -36,6 +39,7 @@ namespace MyPhotoViewer.Model
             return null;
         }
 
+        // Save photoviewer album list to xml file
         public void save()
         {
             XMLSaver.WriteXml(this.AlbumsList);

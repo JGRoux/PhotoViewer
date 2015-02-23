@@ -7,17 +7,17 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.IO;
 using MyPhotoViewer.Model;
+using MyPhotoViewer.Controller;
 
 namespace MyPhotoViewer.View
 {
     public partial class UserControlMiniatures : UserControl
     {
-        ImageList imageList1 = new ImageList();
-                
-        public Album album { get; set; }
-        PhotoViewer photoViewer;
-        int numberOfPictures = 0;
+        private Album album;
+        private PhotoViewer photoViewer;
+        private ImageList imageList = new ImageList();
 
         public event EventHandler displayPicture;
         public event EventHandler Diaporama;
@@ -25,125 +25,177 @@ namespace MyPhotoViewer.View
         public UserControlMiniatures(PhotoViewer photoViewer, Album album)
         {
             InitializeComponent();
-            imageList1.ColorDepth = ColorDepth.Depth32Bit;
-
-            ToolTip toolTip1 = new ToolTip();
-            toolTip1.SetToolTip(this.button1, "Add a photo to this album");
-            ToolTip toolTip2 = new ToolTip();
-            toolTip2.SetToolTip(this.button2, "Diaporama");
-
             this.photoViewer = photoViewer;
             this.album = album;
+        }
 
-            this.Anchor = (AnchorStyles.Bottom | AnchorStyles.Right);
+        // Call on load
+        private void UserControlMiniatures_Load(object sender, EventArgs e)
+        {
+            // Set tooltip on mouse over
+            ToolTip toolTip = new ToolTip();
+            toolTip.SetToolTip(this.btnAddPictures, "Add pictures to this album");
+            toolTip.SetToolTip(this.btnDiaporama, "Diaporama");
+            toolTip.SetToolTip(this.btnDeletePictures, "Delete pictures");
+
             this.Dock = DockStyle.Fill;
 
-            if(this.album.PicturesList != null)
-            {
-                numberOfPictures = 0;
-                foreach (Picture picture in album.PicturesList)
-                {
-                    numberOfPictures++;
-                    this.imageList1.Images.Add(new Bitmap("albums\\" + this.album.Name + "\\" + picture.Name, true));
-                    this.listView1.Items.Add(new ListViewItem(picture.Name)).ImageIndex = numberOfPictures-1;
-                }
-            }
-            this.createListVew();
+            // If there is no picture in the album display label message
+            if (this.album.PicturesList.Count == 0)
+                this.showNoPicture();
+
+            this.lblAlbumName.Text = this.album.Name;
+
+            this.setButtonState();
+            this.createListView();
         }
 
-        private void createListVew()
+        // Fill the listview with picture items.
+        private void createListView()
         {
-            // Add event handlers for the drag & drop functionality
-            if(this.album.PicturesList.Count > 0)
-                this.label1.Hide();
-            this.listView1.AllowDrop = true;
-            this.listView1.DragDrop += new DragEventHandler(this.listview1_DragDrop);
-            this.listView1.DragEnter += new DragEventHandler(listView1_DragEnter);
-            this.listView1.Dock = DockStyle.Fill;
-            this.listView1.LargeImageList = imageList1;
-            this.imageList1.ImageSize = new Size(100, 100);
-            this.panel1.Controls.Add(listView1);
+            this.imageList.ColorDepth = ColorDepth.Depth32Bit; // Set higher picture quality
+            this.imageList.ImageSize = new Size(100, 100); // Set miniatures size
+
+            // Set pictures to listview
+            if (this.album.PicturesList != null)
+            {
+                for (int i = 0; i < this.album.PicturesList.Count; i++)
+                {
+                    // Use filestream to unlock the file. Imperative to allow deleting file or album.
+                    using (FileStream fs = new FileStream("albums\\" + this.album.Name + "\\" + this.album.PicturesList[i].Name, FileMode.Open, FileAccess.Read))
+                    {
+                        this.imageList.Images.Add(Image.FromStream(fs));
+                    }
+                    this.listViewMiniatures.Items.Add(this.album.PicturesList[i].Name, i);
+                }
+                // Attach imagelist to listview
+                this.listViewMiniatures.LargeImageList = this.imageList;
+            }
         }
 
-        private void listView1_DoubleClick(object sender, EventArgs e)
+        // Display label no picture.
+        private void showNoPicture()
+        {
+            this.lblNoPicture.BringToFront();
+            this.lblNoPicture.Show();
+        }
+
+        // Set buttons state off/on if there is no picture or not.
+        private void setButtonState()
+        {
+            Boolean state = false;
+            if (album.PicturesList.Count > 0)
+                state = true;
+
+            this.btnDiaporama.Enabled = state;
+            this.btnDeletePictures.Enabled = state;
+        }
+
+        // Double click event on listview. Display picture of miniature clicked to user control picture.
+        private void listView_DoubleClick(object sender, EventArgs e)
         {
             displayPicture(this, e);
         }
 
-        private void getFiles(string[] files){
-        // Read the files
-                foreach (String file in files)
+        // Get new pictures from files path. Copy files to album folder. Add picture to xml. Add miniatures to listview.
+        private void getFiles(string[] files)
+        {
+            // Read the files
+            foreach (String file in files)
+            {
+                // New picture
+                try
                 {
-                    // New picture
-                    try
+                    String path = "albums\\" + this.album.Name + file.Substring(file.LastIndexOf('\\'));
+                    if (File.Exists(path))
+                        MessageBox.Show("File " + file.Substring(file.LastIndexOf('\\') + 1) + " already exist in this album.");
+                    else
                     {
-                        numberOfPictures++;
-                        System.IO.File.Copy(file, "albums\\"+this.album.Name+file.Substring(file.LastIndexOf('\\')), true);
-                        this.album.addPicture(file.Substring(file.LastIndexOf('\\')+1));
-                        this.imageList1.Images.Add(new Bitmap("albums\\" + this.album.Name + "\\" + file.Substring(file.LastIndexOf('\\') + 1), true));
-                        this.listView1.Items.Add(new ListViewItem(file.Substring(file.LastIndexOf('\\')+1))).ImageIndex = numberOfPictures - 1;
+                        File.Copy(file, path, true);
+                        this.album.addPicture(file.Substring(file.LastIndexOf('\\') + 1));
+                        // Use filestream to unlock the file. Imperative to allow deleting file or album.
+                        using (FileStream fs = new FileStream(path, FileMode.Open, FileAccess.Read))
+                        {
+                            this.imageList.Images.Add(Image.FromStream(fs));
+                        }
+                        this.listViewMiniatures.Items.Add(file.Substring(file.LastIndexOf('\\') + 1), album.PicturesList.Count - 1);
                         this.Refresh();
                     }
-                    catch (Exception ex)
-                    {
-                        // Could not load the image - probably related to Windows file system permissions.
-                        MessageBox.Show("Cannot display the image: " + file.Substring(file.LastIndexOf('\\')+1)
-                            + ". You may not have permission to read the file, or " +
-                            "it may be corrupt.\n\nReported error: " + ex.Message);
-                    }
                 }
-                this.photoViewer.save();
+                catch (Exception ex)
+                {
+                    MessageBox.Show("Cannot display the image: " + file.Substring(file.LastIndexOf('\\') + 1));
+                    Console.WriteLine(ex.StackTrace);
+                }
+            }
+            // Hide label no picture.
+            if (this.album.PicturesList.Count != 0)
+                this.lblNoPicture.Hide();
+
+            this.setButtonState();
+            this.photoViewer.save();
         }
 
-        private void button1_Click(object sender, EventArgs e)
+        // Button add picture click event. Open file chooser and get new pictures.
+        private void btnAddPictures_Click(object sender, EventArgs e)
         {
-            OpenFileDialog openFileDialog1 = new OpenFileDialog();
-            openFileDialog1.Filter = "Images (*.png, *.jpg)|*.png;*.jpg";
-            openFileDialog1.Title = "Select some pictures";
-            openFileDialog1.Multiselect = true;
+            OpenFileDialog openFileDialog = new OpenFileDialog();
+            openFileDialog.Filter = "Images (*.png, *.jpg)|*.png;*.jpg";
+            openFileDialog.Title = "Select some pictures";
+            openFileDialog.Multiselect = true;
 
-            if (openFileDialog1.ShowDialog() == System.Windows.Forms.DialogResult.OK)
+            if (openFileDialog.ShowDialog() == DialogResult.OK)
             {
-                this.getFiles(openFileDialog1.FileNames);
+                this.getFiles(openFileDialog.FileNames);
             }
         }
 
-        private void listView1_DragEnter(object sender, DragEventArgs e)
+        // Drag enter event on listview or lblNoPicture. Make cursor copy on drag.
+        private void picture_DragEnter(object sender, DragEventArgs e)
         {
             e.Effect = DragDropEffects.Copy;
         }
 
-        private void listview1_DragDrop(object sender, DragEventArgs e)
+        // Drag&Drop event on listview or lblNoPicture. Get new pictures.
+        private void picture_DragDrop(object sender, DragEventArgs e)
         {
-           this.getFiles((string[])e.Data.GetData(DataFormats.FileDrop));
-        }
-
-        private void label1_DragDrop(object sender, DragEventArgs e)
-        {
-            this.label1.Hide();
-            this.createListVew();
             this.getFiles((string[])e.Data.GetData(DataFormats.FileDrop));
         }
 
-        private void label1_DragEnter(object sender, DragEventArgs e)
-        {
-            e.Effect = DragDropEffects.Copy;
-        }
-
-        private void label1_DoubleClick(object sender, EventArgs e)
-        {
-
-        }
-
-        private void listView1_ColumnClick(object sender, ColumnClickEventArgs e)
-        {
-
-        }
-
-        private void button2_Click(object sender, EventArgs e)
+        // Button diaporama click event. Start diaporama.
+        private void btnDiaporama_Click(object sender, EventArgs e)
         {
             Diaporama(this, e);
         }
-        
+
+        // Listview mouse move event. Make cursor hand over item.
+        private void listView_MouseMove(object sender, MouseEventArgs e)
+        {
+            if (listViewMiniatures.HitTest(e.X, e.Y).Item != null)
+                this.Cursor = Cursors.Hand;
+            else
+                this.Cursor = Cursors.Default;
+        }
+
+        // Button delete click event. Delete every picture selected. Ask user confirmation.
+        private void btnDeletePictures_Click(object sender, EventArgs e)
+        {
+            if (this.listViewMiniatures.SelectedItems.Count != 0)
+                if (MessageBox.Show("The pictures selected will be deleted.", "Delete pictures", MessageBoxButtons.OKCancel) == DialogResult.OK)
+                {
+                    foreach (ListViewItem item in this.listViewMiniatures.SelectedItems)
+                    {
+                        this.album.removePicture(item.SubItems[0].Text);
+                        this.imageList.Images[item.Index].Dispose();
+                        this.listViewMiniatures.Items.Remove(item);
+                        File.Delete("albums\\" + this.album.Name + "\\" + item.SubItems[0].Text);
+                    }
+                    if (this.album.PicturesList.Count == 0)
+                        this.showNoPicture();
+
+                    this.setButtonState();
+                    this.photoViewer.save();
+                }
+        }
     }
 }
