@@ -8,6 +8,8 @@ using System.Xml.Serialization;
 
 namespace MyPhotoViewer.Controller
 {
+    // Class that allow to save/read albums with infos to xml file
+
     class XMLSaver
     {
         private static String filename = "infos.xml";

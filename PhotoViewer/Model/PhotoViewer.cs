@@ -7,6 +7,8 @@ using System.Threading.Tasks;
 
 namespace MyPhotoViewer.Model
 {
+    // Class representing the whole photoviewer model with its albums
+
     public class PhotoViewer
     {
         public List<Album> AlbumsList;

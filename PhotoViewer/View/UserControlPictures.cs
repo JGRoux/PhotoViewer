@@ -13,13 +13,24 @@ using MyPhotoViewer.Model;
 
 namespace MyPhotoViewer.View
 {
+    /* User control class displaying picture with infos of an album.
+    * 
+    * Implementations:
+    * Go to previous/next picture with buttons or arrow keys
+    * Return to miniatures view with back button
+    * Start diaporama mode by double click on picture (diaporama mode is in fact the picture box in fullscreen)
+    * Change picture rating by clicking on stars
+    * Change picture description by clicking on text box and confirm with enter key
+    * 
+    */
+
     public partial class UserControlPictures : UserControl
     {
-        private Album album;
         private int index;
         private int rating;
         private PhotoViewer photoViewer;
 
+        public Album album { get; set; }
         public event EventHandler goBack;
         public event EventHandler startDiaporama;
         public Timer timer = new Timer();
@@ -71,11 +82,7 @@ namespace MyPhotoViewer.View
         public void previousPicture()
         {
             // Change picture index
-            if (this.index == 0)
-                this.index = this.album.PicturesList.Count - 1;
-            else
-                this.index--;
-
+            this.index = ((this.index - 1) + this.album.PicturesList.Count) % this.album.PicturesList.Count;
             this.setPicture();
         }
 
@@ -188,19 +195,6 @@ namespace MyPhotoViewer.View
                 this.star5.Image = MyPhotoViewer.Properties.Resources.icon_empty_star;
         }
 
-        // Text box picture description event on key down. Save picture description to xml on key enter.
-        private void txtBxPictureDescription_KeyDown(object sender, KeyEventArgs e)
-        {
-            if (e.KeyCode == Keys.Enter)
-            {
-                this.album.PicturesList.ElementAt(index).Description = this.txtBxPictureDescription.Text;
-                this.photoViewer.save();
-                this.txtBxPictureDescription.BackColor = SystemColors.Control;
-                SendKeys.Send("{TAB}");
-                e.Handled = e.SuppressKeyPress = true; // Allow to suppress the 'ding' sound
-            }
-        }
-
         // Mouse enter event on text box description. Set background color to white.
         private void txtBxPictureDescription_MouseEnter(object sender, EventArgs e)
         {
@@ -211,6 +205,19 @@ namespace MyPhotoViewer.View
         private void txtBxPictureDescription_MouseLeave(object sender, EventArgs e)
         {
             this.txtBxPictureDescription.BackColor = SystemColors.Control;
+        }
+
+        // Text box picture description event on key down. Save picture description to xml on key enter.
+        private void txtBxPictureDescription_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                this.album.PicturesList.ElementAt(index).Description = this.txtBxPictureDescription.Text;
+                this.photoViewer.save();
+                this.txtBxPictureDescription.BackColor = SystemColors.Control;
+                SendKeys.Send("{TAB}"); // Emulate tab key pressed (change the focus)
+                e.Handled = e.SuppressKeyPress = true; // Allow to suppress the 'ding' sound
+            }
         }
     }
 }

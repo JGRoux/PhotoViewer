@@ -14,6 +14,21 @@ using System.Windows.Forms;
 
 namespace MyPhotoViewer
 {
+    /* Main window.
+    * 
+    * Implementations:
+    * Add album by clicking on button add
+    * Display albums in the left listbox (sorted by name)
+    * Display album miniature by clicking on album in listbox
+    * Rename an album by right click on an album in the listbox
+    * Delete an album by right click on an album in the listbox
+    * Get global key events :
+    *   key left/right to previous/next picture on user control picture
+    *   key +/- to manage diaporama timer
+    *   key escape to escape diaporama mode
+    * 
+    */
+
     public partial class MainForm : Form
     {
         private ContextMenuStrip listboxContextMenu;
@@ -26,12 +41,12 @@ namespace MyPhotoViewer
         }
 
         // Call on load
-        private void Form1_Load(object sender, EventArgs e)
+        private void MainForm_Load(object sender, EventArgs e)
         {
             this.diaporama = new Diaporama(this);
             this.listboxContextMenu = new ContextMenuStrip();
-            this.listboxContextMenu.Opening += new CancelEventHandler(listboxContextMenu_Opening);
-            this.listboxContextMenu.ItemClicked += new ToolStripItemClickedEventHandler(listboxContextMenu_ItemClicked);
+            this.listboxContextMenu.Opening += new CancelEventHandler(lstBxAlbumsContextMenu_Opening);
+            this.listboxContextMenu.ItemClicked += new ToolStripItemClickedEventHandler(lstBxAlbumsContextMenu_ItemClicked);
             this.lstBxAlbums.ContextMenuStrip = listboxContextMenu;
 
             // Set tooltip on mouse over
@@ -45,7 +60,7 @@ namespace MyPhotoViewer
         }
 
         // Context menu strip content
-        private void listboxContextMenu_Opening(object sender, CancelEventArgs e)
+        private void lstBxAlbumsContextMenu_Opening(object sender, CancelEventArgs e)
         {
             //clear the menu and add custom items
             this.listboxContextMenu.Items.Clear();
@@ -57,7 +72,7 @@ namespace MyPhotoViewer
         }
 
         // Context menu strip click events (Rename/Delete album)
-        private void listboxContextMenu_ItemClicked(object sender, ToolStripItemClickedEventArgs e)
+        private void lstBxAlbumsContextMenu_ItemClicked(object sender, ToolStripItemClickedEventArgs e)
         {
             this.listboxContextMenu.Hide();
             if (e.ClickedItem.ToString().Equals("Rename")) // Display dialog albm name to rename
@@ -134,7 +149,7 @@ namespace MyPhotoViewer
         }
 
         // Mouse click on listbox
-        private void listBox1_MouseDown(object sender, MouseEventArgs e)
+        private void lstBxAlbums_MouseDown(object sender, MouseEventArgs e)
         {
             //select the item under the mouse pointer
             this.lstBxAlbums.SelectedIndex = lstBxAlbums.IndexFromPoint(e.Location);
@@ -159,13 +174,13 @@ namespace MyPhotoViewer
                 this.splitContainer.Panel2.Controls.Clear();
                 UserControlMiniatures Ucm1 = new UserControlMiniatures(this.photoViewer, this.photoViewer.getAlbum(lstBxAlbums.SelectedItem.ToString()));
                 this.splitContainer.Panel2.Controls.Add(Ucm1);
-                Ucm1.displayPicture += Ucm1_displayPicture;
-                Ucm1.Diaporama += Ucm1_Diaporama;
+                Ucm1.displayPicture += Ucm_displayPicture;
+                Ucm1.Diaporama += Ucm_Diaporama;
             }
         }
 
         // Display user control photo in diaporama mode
-        private void Ucm1_Diaporama(object sender, EventArgs e)
+        private void Ucm_Diaporama(object sender, EventArgs e)
         {
             if (!this.diaporama.IsFullScreen)
             {
@@ -174,7 +189,7 @@ namespace MyPhotoViewer
                 this.splitContainer.Panel2.Dock = DockStyle.Fill;
                 Cursor.Hide();
                 if (sender is MyPhotoViewer.View.UserControlMiniatures)
-                    Ucm1_displayPicture(sender, e);
+                    Ucm_displayPicture(sender, e);
                 ((UserControlPictures)this.splitContainer.Panel2.Controls[0]).setFullScreen(true);
                 ((UserControlPictures)this.splitContainer.Panel2.Controls[0]).timer.Start();
                 this.diaporama.setFullScreen(true);
@@ -183,7 +198,7 @@ namespace MyPhotoViewer
         }
 
         // Display user control photo
-        private void Ucm1_displayPicture(object sender, EventArgs e)
+        private void Ucm_displayPicture(object sender, EventArgs e)
         {
             int index = 0;
             var Ucm = sender as UserControlMiniatures;
@@ -194,12 +209,14 @@ namespace MyPhotoViewer
             Ucp.Dock = DockStyle.Fill;
             this.splitContainer.Panel2.Controls.Add(Ucp);
             Ucp.goBack += Ucp_back;
-            Ucp.startDiaporama += Ucm1_Diaporama;
+            Ucp.startDiaporama += Ucm_Diaporama;
         }
 
         // Return to album miniatures from user control photo
         private void Ucp_back(object sender, EventArgs e)
         {
+            var Ucp = sender as UserControlPictures;
+            this.lstBxAlbums.SelectedItem = Ucp.album.Name;
             this.displayAlbumsMiniatures();
         }
 

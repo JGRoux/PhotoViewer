@@ -7,6 +7,8 @@ using System.IO;
 
 namespace MyPhotoViewer
 {
+    // Class representing  an album with its pictures and infos
+
     [Serializable()]
     public class Album
     {

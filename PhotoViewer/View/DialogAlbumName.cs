@@ -10,16 +10,12 @@ using System.Windows.Forms;
 
 namespace MyPhotoViewer.View
 {
+    // Window to get album name from user.
     public partial class DialogAlbumName : Form
     {
         public DialogAlbumName()
         {
             InitializeComponent();
-        }
-
-        private void textBox_TextChanged(object sender, EventArgs e)
-        {
-
         }
 
         public TextBox getTextBox(){

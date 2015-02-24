@@ -116,7 +116,7 @@
             this.lstBxAlbums.Sorted = true;
             this.lstBxAlbums.TabIndex = 0;
             this.lstBxAlbums.SelectedIndexChanged += new System.EventHandler(this.lstBxAlbums_SelectedIndexChanged);
-            this.lstBxAlbums.MouseDown += new System.Windows.Forms.MouseEventHandler(this.listBox1_MouseDown);
+            this.lstBxAlbums.MouseDown += new System.Windows.Forms.MouseEventHandler(this.lstBxAlbums_MouseDown);
             // 
             // lblWelcome
             // 
@@ -142,7 +142,7 @@
             this.MinimumSize = new System.Drawing.Size(800, 450);
             this.Name = "MainForm";
             this.Text = "PhotoViewer";
-            this.Load += new System.EventHandler(this.Form1_Load);
+            this.Load += new System.EventHandler(this.MainForm_Load);
             this.splitContainer.Panel1.ResumeLayout(false);
             this.splitContainer.Panel2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer)).EndInit();

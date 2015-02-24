@@ -8,9 +8,7 @@ namespace MyPhotoViewer
 {
     static class Program
     {
-        /// <summary>
-        /// Point d'entrée principal de l'application.
-        /// </summary>
+        // Entry point
         [STAThread]
         static void Main()
         {

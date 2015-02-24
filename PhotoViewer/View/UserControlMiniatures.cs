@@ -13,6 +13,16 @@ using MyPhotoViewer.Controller;
 
 namespace MyPhotoViewer.View
 {
+    /* User control class displaying miniatures of an album.
+    * 
+    * Implementations:
+    * Add multiple pictures to the album with button add and file chooser or by drag&drop
+    * Start diaporama (diaporama start with first selected picture or if there is not by first picture)
+    * Delete selected pictures with button delete
+    * Display picture and infos (user control picture) by double clicking on one picture
+    * 
+    */
+
     public partial class UserControlMiniatures : UserControl
     {
         private Album album;

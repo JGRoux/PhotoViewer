@@ -6,6 +6,8 @@ using System.Threading.Tasks;
 
 namespace MyPhotoViewer
 {
+    // Class representing a picture with its infos.
+
     [Serializable()]
     public class Picture
     {

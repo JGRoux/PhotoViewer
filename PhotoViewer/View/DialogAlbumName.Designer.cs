@@ -39,7 +39,6 @@
             this.txtBxAlbumName.Name = "txtBxAlbumName";
             this.txtBxAlbumName.Size = new System.Drawing.Size(260, 20);
             this.txtBxAlbumName.TabIndex = 0;
-            this.txtBxAlbumName.TextChanged += new System.EventHandler(this.textBox_TextChanged);
             // 
             // btnOk
             // 
