@@ -5,7 +5,7 @@ Gestion des photos par albums.
 Possibilité d'ajouter une note et un texte à chaque photo.
 Mode diaporama avec délai variable.
 
-Contributeurs:
+**Contributeurs:**
 - Alexandre Bensimon
 - Jean-Guillaume Roux
 
